@@ -1,6 +1,7 @@
 deps
 ebin
 _rel
+pkg/erdico_*
 logs
 .*.sw?
 .erlang.mk.*

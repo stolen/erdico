@@ -1,0 +1,24 @@
+#!/bin/sh
+set -e
+
+APP=erdico
+
+case "$1" in
+    configure)
+        dpkg-statoverride --force --update --add $APP $APP 0755 /var/log/$APP
+        dpkg-statoverride --force --update --add $APP $APP 0755 /var/lib/$APP
+        ln -sf /usr/lib/$APP/releases/*/vm.args /var/lib/$APP/
+        ln -sf /usr/lib/$APP/releases/*/sys.config /var/lib/$APP/
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+#DEBHELPER#
+exit 0

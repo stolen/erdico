@@ -1,0 +1,25 @@
+#!/bin/sh
+set -e
+
+APP=erdico
+
+case "$1" in
+    install)
+        getent group $APP >/dev/null || groupadd -r $APP
+        getent passwd $APP >/dev/null || useradd -r -g $APP -d /var/lib/$APP -s /sbin/nologin -c "$APP" $APP
+    ;;
+
+    upgrade)
+    ;;
+
+    abort-upgrade)
+    ;;
+
+    *)
+        echo "preinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+#DEBHELPER#
+exit 0

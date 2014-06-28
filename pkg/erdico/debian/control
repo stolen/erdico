@@ -1,0 +1,14 @@
+Source: erdico
+Section: web
+Priority: extra
+Maintainer: Danil Zagoskin <z@gosk.in>
+Build-Depends: debhelper (>= 8.0.0)
+Standards-Version: 3.9.3
+Homepage: https://github.com/stolen/erdico
+Vcs-Browser: https://github.com/stolen/erdico
+
+Package: erdico
+Architecture: any
+Depends: libcap2-bin, ${shlibs:Depends}, ${misc:Depends}
+Description: Erlang Distributed Counter
+ Example Ubuntu/Debian Erlang cluster application
