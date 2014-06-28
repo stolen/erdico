@@ -1,0 +1,9 @@
+{application, erdico, [
+        {description, "Hello, Upstart distributed Erlang service"},
+        {id, "ErDiCo"},
+        {vsn, "0.1"},
+        {applications, [kernel, stdlib, lager, cowboy]},
+        {modules, []},
+        {mod, {erdico, []}},
+        {registered, [erdico]}
+        ]}.

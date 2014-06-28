@@ -1,0 +1,7 @@
+deps
+ebin
+_rel
+logs
+.*.sw?
+.erlang.mk.*
+erl_crash.dump
