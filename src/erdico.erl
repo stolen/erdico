@@ -39,8 +39,14 @@ start_cowboy() ->
     Host = {'_', [DefPath]},                % No virtualhosts
     Dispatch = cowboy_router:compile([Host]),
     Env = [{env, [{dispatch, Dispatch}]}],
-    Hooks = [{onresponse, fun erdico_log:access_log_hook/4}],
+    Hooks = configured_hooks(),
     cowboy:start_http(?MODULE, 10, [{port, conf(port, 2080)}], Env ++ Hooks).
 
 conf(Key, Default) ->
     application:get_env(?MODULE, Key, Default).
+
+configured_hooks() ->
+    case conf(log_access, true) of
+        true -> [{onresponse, fun erdico_log:access_log_hook/4}];
+        false -> []
+    end.
