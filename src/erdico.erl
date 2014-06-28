@@ -35,8 +35,9 @@ init(root) ->
 %%% Internals
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 start_cowboy() ->
+    UserInc = {"/inc/:amount", erdico_handler, user_inc},
     DefPath = {'_', erdico_handler, []},    % Catch-all path
-    Host = {'_', [DefPath]},                % No virtualhosts
+    Host = {'_', [UserInc, DefPath]},                % No virtualhosts
     Dispatch = cowboy_router:compile([Host]),
     Env = [{env, [{dispatch, Dispatch}]}],
     Hooks = configured_hooks(),
