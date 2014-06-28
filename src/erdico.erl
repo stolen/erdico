@@ -27,7 +27,9 @@ stop(_) ->
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 init(root) ->
     {ok, _} = start_cowboy(),
-    {ok, {{one_for_one, 10, 5}, []}}.
+    Counter = {counter, {erdico_counter, start_link, []},
+               permanent, 1000, worker, [erdico_counter]},
+    {ok, {{one_for_one, 10, 5}, [Counter]}}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Internals
@@ -37,4 +39,7 @@ start_cowboy() ->
     Host = {'_', [DefPath]},                % No virtualhosts
     Dispatch = cowboy_router:compile([Host]),
     Env = [{env, [{dispatch, Dispatch}]}],
-    cowboy:start_http(?MODULE, 10, [{port, 2080}], Env).
+    cowboy:start_http(?MODULE, 10, [{port, conf(port, 2080)}], Env).
+
+conf(Key, Default) ->
+    application:get_env(?MODULE, Key, Default).
