@@ -2,7 +2,7 @@
 
 APP=erdico
 LOG=/var/log/$APP
-HOME=/var/lib/$APP
+export HOME=/var/lib/$APP
 
 export NL="
 "
