@@ -1,3 +1,6 @@
--sname erdico
-
 -setcookie erdico
+
+# Parametrized node name with default value
+# ${NL}-name erdico@${FQDN}
+# ${NL}-extra
+-sname mini-erdico
